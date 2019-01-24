@@ -1,0 +1,24 @@
+.text{
+    text-align: center;
+    margin-top:50px;
+}
+.list{
+    list-style-type: none;
+    text-align: center;
+}
+li{
+    margin-top:100px;
+    font-size: 40px;
+    
+}
+img{
+    width:50px;
+    margin-right: 10px;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+a:hover{
+    color:blue;
+}

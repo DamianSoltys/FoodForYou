@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-12">
+        
+    <form [formGroup]="Add_plan" (ngSubmit)="onSubmit()">  
+            <div class="formGroup">
+        <label class="form-check-label1" for="select1">Rodzaj diety</label>
+      <select formControlName="genre" required value="Dieta lekkostrawna" id="select1" class="form-control">
+          <option value="Dieta lekkostrawna">Dieta lekkostrawna</option>
+          <option value="Dieta do schudnięcia">Dieta do schudnięcia</option>
+          <option value="Dieta kulturystyczna">Dieta kulturystyczna</option>
+          <option value="Dieta atletyczna">Dieta atletyczna</option>
+      </select>
+      <small *ngIf="Add_plan.get('genre').errors?.required && Add_plan.get('genre').touched" class="text-danger">Proszę wybrać opcje</small>
+    </div>
+    <div class="formGroup align-center">
+            <label class="form-check-label1" for="select2">Dostępny budżet</label>
+      <select formControlName="value" required value="100zł" class="form-control">
+            <option value="100zł">100zł</option>
+            <option value="200zł">200zł</option>
+            <option value="300zł">300zł</option>
+            <option value="400zł">400zł</option>
+        </select>
+        <small *ngIf="Add_plan.get('value').errors?.required && Add_plan.get('value').touched" class="text-danger">Proszę wybrać opcje</small>
+    </div>
+    <div class="formGroup">
+            <label class="form-check-label1" for="select3">Tkanka tłuszczowa</label>
+            <select formControlName="fat" required class="form-control">
+                  <option value="0-15%">0-15%</option>
+                  <option value="15-25%">15-25%</option>
+                  <option value="25-35%">25-35%</option>
+                  <option value="35-45%">35-45%</option>
+              </select>
+              <small *ngIf="Add_plan.get('fat').errors?.required && Add_plan.get('fat').touched" class="text-danger">Proszę wybrać opcje</small>
+          </div>
+              <div class="formGroup">
+                    <label class="form-check-label1" for="select4">Ulubiona kuchnia</label>
+                    <select formControlName="cuisine" required value="100Zł" id="select4" class="form-control">
+                          <option value="Azjatycka">Azjatycka</option>
+                          <option value="Polska">Polska</option>
+                          <option value="Niemiecka">Niemiecka</option>
+                          <option value="Arabska">Arabska</option>
+                      </select>
+                      <small *ngIf="Add_plan.get('cuisine').errors?.required && Add_plan.get('cuisine').touched" class="text-danger">Proszę wybrać opcje</small>
+                  </div>
+                  <div class="formGroup">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="sex" value="man" id="sex1" required>
+                    <label class="form-check-label" for="sex1">Mężczyzna</label>
+                  </div>
+                  <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="sex" value="woman" id="sex2" required>
+                      <label class="form-check-label" for="sex2">Kobieta</label>
+                    </div>
+                    <small *ngIf="Add_plan.get('sex').errors?.required && Add_plan.get('sex').touched" class="text-danger">Proszę wybrać opcje</small>
+                </div>
+                <div class="form-group">
+                        <button class="btn btn-primary" type="submit" [disabled]="!Add_plan.valid">Zatwierdź</button>
+                      </div>
+
+
+
+    </form>
+    <div *ngIf="error">
+            <small [class.text-danger]="!success" [class.text-success]="success">{{error}}</small>
+          </div>
+</div>
+</div>
+<div *ngIf="Plans" class="row overflow">
+<div  *ngFor="let plan_ of Plans;let i=index" class="plan col-12 align-center">
+    <div class="col-12 plans">
+        <p class="plan_text">Plan:{{i+1}}</p>
+        <p class="plan_text">Kuchnia:{{plan_.cuisine}}</p>
+        <p class="plan_text">Cena:{{plan_.value_}}</p>
+        <p class="plan_text">Rodzaj:{{plan_.genre}}</p> 
+        <p class="plan_text">Tkanka tłuszczowa:{{plan_.fat}}</p>
+        <p class="plan_text">Płeć:{{plan_.sex}}</p>
+        <button class="btn btn-danger" (click)="Delete_plan(plan_)">Usuń</button>
+    </div>
+</div>
+</div>

@@ -1,0 +1,23 @@
+.navigation{
+    list-style-type: none;
+    margin-top:50px;
+    padding: 0;
+    
+}
+.nav_item{
+    margin-top: 20px;
+    border: 3px dotted #8e0d98;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 50%;
+    text-align: center;
+    width:50%;
+    margin: auto;
+    margin-top: 20px;
+}
+.col-6{
+    margin: auto;
+}
+.row{
+    text-align: center;
+}

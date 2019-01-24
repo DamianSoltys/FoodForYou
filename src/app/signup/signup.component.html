@@ -1,0 +1,70 @@
+
+<form class="form" [formGroup]="Signup_form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Imię</label>
+  <input type="text" class="form-control" formControlName="username" required
+  [class.is-invalid]="Signup_form.get('username').invalid && Signup_form.get('username').touched">
+  <div *ngIf="Signup_form.get('username').invalid && Signup_form.get('username').touched">
+    <small *ngIf="Signup_form.get('username').errors?.required" class="text-danger">Imie jest wymagane</small>
+    <small *ngIf="Signup_form.get('username').errors?.minlength" class="text-danger">Imie musi mieć więcej niż 3 znaki</small>
+
+  </div>
+  </div>
+  <div class="form-group">
+      <label for="surname">Nazwisko</label>
+    <input type="text" class="form-control" formControlName="surname" required
+    [class.is-invalid]="Signup_form.get('surname').invalid && Signup_form.get('surname').touched">
+    <div *ngIf="Signup_form.get('surname').invalid && Signup_form.get('surname').touched">
+    <small *ngIf="Signup_form.get('surname').errors?.required" class="text-danger">Nazwisko jest wymagane</small>
+    <small *ngIf="Signup_form.get('surname').errors?.minlength" class="text-danger">Nazwisko musi mieć więcej niż 3 znaki</small>
+    </div>
+  </div>
+    <div class="form-group">
+        <label for="email">Adres Email</label>
+      <input type="email" class="form-control" formControlName="email" required
+      [class.is-invalid]="Signup_form.get('email').invalid && Signup_form.get('email').touched">
+  <div *ngIf="Signup_form.get('email').invalid && Signup_form.get('email').touched">
+    <small *ngIf="Signup_form.get('email').errors?.required" class="text-danger">Email jest wymagany</small>
+    <small *ngIf="Signup_form.get('email').errors?.email" class="text-danger">Niepoprawny email</small>
+
+  </div>
+      </div>
+      <div class="form-group">
+          <label for="name">Hasło</label>
+        <input type="password" class="form-control" formControlName="pass" required
+       [class.is-invalid]="Signup_form.get('pass').invalid && Signup_form.get('pass').touched">
+        <div *ngIf="Signup_form.get('pass').invalid && Signup_form.get('pass').touched">
+          <small *ngIf="Signup_form.get('pass').errors?.required" class="text-danger">Hasło jest wymagane</small>
+          <small *ngIf="Signup_form.get('pass').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3 znaki</small> 
+      
+        </div>
+        
+        </div>
+        <div class="form-group">
+            <label for="passcheck">Powtórz hasło</label>
+          <input type="password" class="form-control" formControlName="passcheck" required
+          [class.is-invalid]="Signup_form.get('passcheck').invalid && Signup_form.get('passcheck').touched">
+        <div *ngIf="Signup_form.get('passcheck').invalid && Signup_form.get('passcheck').touched">
+          <small *ngIf="Signup_form.get('passcheck').errors?.required" class="text-danger">Hasło jest wymagane</small>
+          <small *ngIf="Signup_form.get('passcheck').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3 znaki</small> 
+      
+        </div>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" formControlName="sex" value="man" id="sex1" required>
+            <label class="form-check-label" for="sex1">Mężczyzna</label>
+          </div>
+          <div class="form-check">
+              <input class="form-check-input" type="radio" formControlName="sex" value="woman" id="sex2" required>
+              <label class="form-check-label" for="sex2">Kobieta</label>
+              <div *ngIf="Signup_form.get('sex').touched">
+                  <small *ngIf="Signup_form.get('sex').errors?.required" class="text-danger">Hasło</small>
+                  </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" [disabled]="!Signup_form.valid">Zatwierdź</button>
+            </div>
+            <div *ngIf="error">
+              <small [class.text-danger]="!success" [class.text-success]="success">{{error}}</small>
+            </div>
+</form>
