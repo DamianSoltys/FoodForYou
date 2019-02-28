@@ -3,44 +3,68 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class LoginService {
 
- logged = new BehaviorSubject(false);
-currentlogged = this.logged.asObservable();
+  public logged = new BehaviorSubject(false);
+  public currentlogged = this.logged.asObservable();
+  
+  private _host: string = 'http://localhost';
 
   constructor(private http: HttpClient) { }
 
-
-  Login(email, pass) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Login', {'email': email, 'pass': pass});
-
+  public Login(email, pass) {
+    return this.http.post(this._host + '/ProjektPHP/assets/Login', {
+      'email': email, 
+      'pass': pass,
+    });
   }
-  Check_auth() {
-    return this.http.get('http://localhost/ProjektPHP/assets/CheckAuth');
+  
+  public Check_auth() {
+    return this.http.get(this._host + '/ProjektPHP/assets/CheckAuth');
   }
-  logout() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Logout');
+  
+  public logout() {
+    return this.http.get(this._host + '/ProjektPHP/assets/Logout');
   }
-  getLogged(logged) {
+  
+  public etLogged(logged) {
      this.logged.next(logged);
   }
-  ChangeData(username, surname, pass, sex, email) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Update', {'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email});
+  
+  public ChangeData(username, surname, pass, sex, email) {
+    return this.http.post(this._host + '/ProjektPHP/assets/Update', {
+      'pass': pass, 
+      'username': username, 
+      'surname': surname, 
+      'sex': sex, 
+      'email': email,
+    });
+  }
+  
+  public get_Data() {
+    return this.http.get(this._host + '/ProjektPHP/assets/Update');
+  }
 
+  public post_Plan(genre, value, fat, cuisine, sex) {
+    return this.http.post(this._host + '/ProjektPHP/assets/Plan', {
+      'genre': genre, 
+      'value': value, 
+      'fat': fat, 
+      'cuisine': cuisine, 
+      'sex': sex,
+    });
   }
-  get_Data() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Update');
+  
+  public get_Plan() {
+    return this.http.get(this._host + '/ProjektPHP/assets/Plan');
   }
-
-  post_Plan(genre, value, fat, cuisine, sex) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Plan', {'genre': genre, 'value': value, 'fat': fat, 'cuisine': cuisine, 'sex': sex});
-  }
-  get_Plan() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Plan');
-  }
-  delete_plan(id_plan){
-    return this.http.post('http://localhost/ProjektPHP/assets/Delete_plan',{'id_plan':id_plan});
+  
+  public delete_plan(id_plan){
+    return this.http.post(this._host + '/ProjektPHP/assets/Delete_plan', {
+      'id_plan':id_plan,
+    });
   }
 }
