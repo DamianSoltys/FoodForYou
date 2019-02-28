@@ -3,22 +3,23 @@
 
 
     background-color: rgba(234, 234, 238, 0.781);
+  /* to raczej przegladarki nowe obsluguje mozna dac box-shadow, pozatym 0px => 0 */
     -webkit-box-shadow: 0px 9px 5px -5px rgba(0,0,0,0.45);
 -moz-box-shadow: 0px 9px 5px -5px rgba(0,0,0,0.45);
 box-shadow: 0px 9px 5px -5px rgba(0,0,0,0.45);
 }
 .footer{
-    position:fixed;
+    position:fixed; /* spacja po : */
     bottom: 0;
-    background-color: rgba(234, 234, 238, 0.781);
+    background-color: rgba(234, 234, 238, 0.781); /* .781 */
     text-align: center;
-    height:30px;
+    height:30px; /* spacja po : */
 }
 .logo{
-    width:10%;
+    width:10%; /* spacja po : */
     height: 90%;
     margin: 5px;
-    margin-left:20px;
+    margin-left:20px; /* spacja po : */
 }
 .navigation{
    list-style-type: none;
@@ -36,11 +37,11 @@ box-shadow: 0px 9px 5px -5px rgba(0,0,0,0.45);
 }
 .link_nav{
     text-decoration: none;
-    color:black;
+    color:black; /* #000 */
     
 }
 .nav_item:hover{
-    opacity:0.8;
+    opacity:0.8; 
     color:grey;
 }
 .nav_item:first-of-type{
