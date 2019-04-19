@@ -1,4 +1,6 @@
 # ProjektPHP
+# Opis
+Jest to aplikacja typu CRUD zbudowana przy pomocy Angulara oraz PHP.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
