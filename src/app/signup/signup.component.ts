@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   constructor(private signup: SignupService) { }
 
   ngOnInit() {
+    
   }
   onSubmit() {
     if (!(this.Signup_form.get('pass').value === this.Signup_form.get('passcheck').value)) {

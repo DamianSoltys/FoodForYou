@@ -1,14 +1,14 @@
 
 <div class="container-fluid">
 <div class="row nav_bar">
-  <div class="col-6">
+  <div class="col-lg-6 col-12 logos">
       <a [routerLink]="['index']"><img src="./assets/images/logo.png" alt="food_logo" class="logo"></a>
       <span class="title">FoodForYou</span>
   </div>
-  <div class="col-6 align-center">
+  <div class="col-lg-6 col-12">
     <ul class="navigation" *ngIf="!logged">
       <li class="nav_item">
-        <a [routerLink]="['signup']" class="link_nav">Zarejestruj się</a>
+        <a [routerLink]="['signup']" class="link_nav ">Zarejestruj się</a>
       </li>
       <li class="nav_item">
         <a [routerLink]="['login']" class="link_nav">Logowanie</a>
@@ -38,6 +38,6 @@
 <div class="container-fluid" >
   <router-outlet ></router-outlet>
 </div>
-<div class="container-fluid footer">
+<div class="container-fluid footer" id="footer">
   Made by <strong>Damian Sołtysiuk</strong>
 </div>

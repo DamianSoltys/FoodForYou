@@ -9,7 +9,8 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
 
 })
 export class AppComponent implements OnInit {
-  constructor(private login: LoginService, private router: Router) {}
+  constructor(private login: LoginService, private router: Router) {
+  }
   logged;
   state: String = 'none';
 ngOnInit(): void {
@@ -26,6 +27,8 @@ ngOnInit(): void {
   }, error => {
     console.log(error);
   });
+
+
 
 }
 

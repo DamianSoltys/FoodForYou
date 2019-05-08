@@ -17,3 +17,14 @@
     text-align: center;
     font-size: 1.5em;
 }
+@media screen and (max-width:992px){
+    .title{
+        margin-top:50px;
+        text-align: center;
+        font-size: 2em;
+    }
+    .text{
+        text-align: center;
+        font-size: 1em;
+    }
+}

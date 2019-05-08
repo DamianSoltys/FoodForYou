@@ -62,7 +62,7 @@
                   </div>
             </div>
             <div class="form-group">
-              <button type="submit" [disabled]="!Signup_form.valid">Zatwierdź</button>
+              <button class="btn btn-light" type="submit" [disabled]="!Signup_form.valid">Zatwierdź</button>
             </div>
             <div *ngIf="error">
               <small [class.text-danger]="!success" [class.text-success]="success">{{error}}</small>
