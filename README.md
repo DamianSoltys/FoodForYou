@@ -2,6 +2,9 @@
 # Opis
 Jest to aplikacja typu CRUD zbudowana przy pomocy Angulara oraz PHP.
 
+It is CRUD type application created with help of Angular and PHP.In this application you can register and login.Also you can change your account infomation and add/delete plans.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
 ## Development server
