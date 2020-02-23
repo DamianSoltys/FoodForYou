@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, AfterContentChecked, AfterViewChecked } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from './services/login.service';
 import { Router, Route } from '@angular/router';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 @Component({

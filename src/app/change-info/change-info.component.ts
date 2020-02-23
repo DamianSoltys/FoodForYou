@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from './User';
-import { LoginService } from '../login.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-change-info',
@@ -24,10 +24,10 @@ export class ChangeInfoComponent implements OnInit {
     passcheck: new FormControl('', Validators.minLength(4)),
     sex: new FormControl('')
   });
-  constructor(private login: LoginService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.login.getData().subscribe(
+    this.dataService.getData().subscribe(
       res => {
         if (res) {
           this.user.username = res[0]['username'];
@@ -59,7 +59,7 @@ export class ChangeInfoComponent implements OnInit {
       this._surname = this.Change_form.get('surname').value;
       this._pass = this.Change_form.get('pass').value;
       this._sex = this.Change_form.get('sex').value;
-      this.login.changeData(this._username, this._surname, this._pass, this._sex, this.user.email).subscribe(
+      this.dataService.changeData(this._username, this._surname, this._pass, this._sex, this.user.email).subscribe(
         res => {
           if (res) {
             switch (res) {

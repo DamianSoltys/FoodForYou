@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from './User';
-import { LoginService } from '../login.service';
+import { LoginService } from '../services/login.service';
 import { Plan } from './Plan';
 import { forEach } from '@angular/router/src/utils/collection';
+import { PlanService } from '../services/plan.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./add-delete-plan.component.css']
 })
 export class AddDeletePlanComponent implements OnInit {
-  constructor(private login: LoginService) { }
+  constructor(private loginService: LoginService, private planService: PlanService) { }
 
   public error = '';
   public success = false;
@@ -42,7 +43,7 @@ export class AddDeletePlanComponent implements OnInit {
     this.fat = this.Add_plan.get('fat').value;
     this.cuisine = this.Add_plan.get('cuisine').value;
     this.sex = this.Add_plan.get('sex').value;
-    this.login.postPlan(this.genre, this.value_, this.fat, this.cuisine, this.sex).subscribe(res => {
+    this.planService.postPlan(this.genre, this.value_, this.fat, this.cuisine, this.sex).subscribe(res => {
       if (res) {
         this.Plans = new Array<Plan>();
         this.getPlans();
@@ -58,7 +59,7 @@ export class AddDeletePlanComponent implements OnInit {
   }
 
   public getPlans() {
-    this.login.getPlan().subscribe(res => {
+    this.planService.getPlan().subscribe(res => {
       if (res) {
         for (this.i = 0; this.i < Object.keys(res).length; this.i++) {
           this.plan = new Plan();
@@ -88,7 +89,7 @@ export class AddDeletePlanComponent implements OnInit {
   }
 
   public deletePlan(plan: Plan) {
-    this.login.deletePlan(plan.id_plan).subscribe(res => {
+    this.planService.deletePlan(plan.id_plan).subscribe(res => {
       this.Plans = new Array<Plan>();
       this.getPlans();
     }, error => {
