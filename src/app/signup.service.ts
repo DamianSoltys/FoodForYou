@@ -12,12 +12,12 @@ import { FormGroup } from '@angular/forms';
 export class SignupService {
 
   constructor(private http: HttpClient) {
-    
-   }
 
-   Signup_func(username,surname,email,pass,sex){
+  }
 
-    
-    return this.http.post("http://localhost/ProjektPHP/assets/Signup",{"username":username,"surname":surname,"email":email,"pass":pass,"sex":sex});
+  Signup_func(username, surname, email, pass, sex) {
+
+
+    return this.http.post("http://localhost/CrudPhp/assets/Signup", { "username": username, "surname": surname, "email": email, "pass": pass, "sex": sex });
   }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ProjektPHP": {
+    "CrudPhp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,16 +13,16 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ProjektPHP",
+            "outputPath": "dist/CrudPhp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              
+
               "src/favicon.ico",
               "src/assets"
-              
+
             ],
             "styles": [
               "src/styles.css"
@@ -31,12 +31,10 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -46,31 +44,29 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
+              "budgets": [{
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ProjektPHP:build"
+            "browserTarget": "CrudPhp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ProjektPHP:build:production"
+              "browserTarget": "CrudPhp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ProjektPHP:build"
+            "browserTarget": "CrudPhp:build"
           }
         },
         "test": {
@@ -104,7 +100,7 @@
         }
       }
     },
-    "ProjektPHP-e2e": {
+    "CrudPhp-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -113,11 +109,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ProjektPHP:serve"
+            "devServerTarget": "CrudPhp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ProjektPHP:serve:production"
+              "devServerTarget": "CrudPhp:serve:production"
             }
           }
         },
@@ -133,5 +129,5 @@
       }
     }
   },
-  "defaultProject": "ProjektPHP"
+  "defaultProject": "CrudPhp"
 }

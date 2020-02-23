@@ -1,6 +1,6 @@
-export class User{
-        username: String = 'Damian';
-        surname: String = 'Soltysiuk';
-        email: String = 'kastiell222@gmail.com';
-        sex: String = 'Mezczyzna';
+export class User {
+        public username: String = 'Damian';
+        public surname: String = 'Soltysiuk';
+        public email: String = 'kastiell222@gmail.com';
+        public sex: String = 'Mezczyzna';
 }

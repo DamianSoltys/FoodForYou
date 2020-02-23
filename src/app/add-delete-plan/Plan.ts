@@ -1,5 +1,4 @@
 export class Plan {
-
     public genre: String;
     public value_: String;
     public fat: String;
@@ -7,6 +6,4 @@ export class Plan {
     public cuisine: String;
     public id_plan: String;
     public id_user: String;
-
-
 }

@@ -9,39 +9,30 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 
 })
 export class AppComponent implements OnInit {
-  constructor(private login: LoginService, private router: Router) {
-  }
-  logged;
-  state: String = 'none';
+  constructor(private login: LoginService, private router: Router) { }
+  public logged;
+  public state: String = 'none';
   ngOnInit(): void {
     this.state = 'none';
     this.login.currentlogged.subscribe(logged => this.logged = logged);
-    this.login.Check_auth().subscribe(res => {
+    this.login.checkAuth().subscribe(res => {
       if (res['auth'] === 1) {
-        console.log(res['user']);
         this.logged = true;
       } else {
-        console.log(res['user']);
         this.logged = false;
       }
     }, error => {
       console.log(error);
     });
-
-
-
   }
 
-  logout() {
-
+  public logout() {
     this.router.navigate(['']);
-    this.login.logout().subscribe(res => {
+    this.login.logoutUser().subscribe(res => {
       this.logged = !res;
-      console.log(res);
       window.alert('Pomyślnie wylogowano');
     }, error => {
       console.log(error);
     });
-
   }
 }

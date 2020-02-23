@@ -7,40 +7,44 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoginService {
 
- logged = new BehaviorSubject(false);
-currentlogged = this.logged.asObservable();
+  public logged = new BehaviorSubject(false);
+  public currentlogged = this.logged.asObservable();
 
   constructor(private http: HttpClient) { }
 
-
-  Login(email, pass) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Login', {'email': email, 'pass': pass});
-
-  }
-  Check_auth() {
-    return this.http.get('http://localhost/ProjektPHP/assets/CheckAuth');
-  }
-  logout() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Logout');
-  }
-  getLogged(logged) {
-     this.logged.next(logged);
-  }
-  ChangeData(username, surname, pass, sex, email) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Update', {'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email});
-
-  }
-  get_Data() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Update');
+  public loginUser(email, pass) {
+    return this.http.post('http://localhost/CrudPhp/assets/Login', { 'email': email, 'pass': pass });
   }
 
-  post_Plan(genre, value, fat, cuisine, sex) {
-    return this.http.post('http://localhost/ProjektPHP/assets/Plan', {'genre': genre, 'value': value, 'fat': fat, 'cuisine': cuisine, 'sex': sex});
+  public checkAuth() {
+    return this.http.get('http://localhost/CrudPhp/assets/CheckAuth');
   }
-  get_Plan() {
-    return this.http.get('http://localhost/ProjektPHP/assets/Plan');
+
+  public logoutUser() {
+    return this.http.get('http://localhost/CrudPhp/assets/Logout');
   }
-  delete_plan(id_plan){
-    return this.http.post('http://localhost/ProjektPHP/assets/Delete_plan',{'id_plan':id_plan});
+
+  public getLogged(logged) {
+    this.logged.next(logged);
+  }
+
+  public changeData(username, surname, pass, sex, email) {
+    return this.http.post('http://localhost/CrudPhp/assets/Update', { 'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email });
+  }
+
+  public getData() {
+    return this.http.get('http://localhost/CrudPhp/assets/Update');
+  }
+
+  public postPlan(genre, value, fat, cuisine, sex) {
+    return this.http.post('http://localhost/CrudPhp/assets/Plan', { 'genre': genre, 'value': value, 'fat': fat, 'cuisine': cuisine, 'sex': sex });
+  }
+
+  public getPlan() {
+    return this.http.get('http://localhost/CrudPhp/assets/Plan');
+  }
+
+  public deletePlan(id_plan) {
+    return this.http.post('http://localhost/CrudPhp/assets/Delete_plan', { 'id_plan': id_plan });
   }
 }

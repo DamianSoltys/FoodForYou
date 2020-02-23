@@ -12,10 +12,8 @@ class Db_config{
             if(mysqli_connect_errno($this->connection))
             {
                 die("Nie udało się połaczyć z bazą danych:". mysqli_connect_error());
-
             }
             mysqli_set_charset($this->connection,"utf8");
-
         }
     }
 }

@@ -72,9 +72,11 @@ class Crud extends Db_config
     }
 
     public function Logout() {
-        session_start();
-        session_destroy();
-        session_abort();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+            session_destroy();
+            session_abort();
+        }
         return true;
     }
 
