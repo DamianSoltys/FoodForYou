@@ -37,15 +37,16 @@ class Crud extends Db_config
         return $this->connection->real_escape_string($value);
     }
 
-    public function check() {
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            $pass = $_SESSION['pass'];
-            $array = array('user' => $user, 'pass' => $pass, 'auth' => 1);
-            return $array;
+    public function check($idUser = null, $token = null) {
+        if ($id_user && $token) {
+            $query = "SELECT * FROM users WHERE Id_user='$id_user'";
+            $userData = $this->Get_data($query);
+            if ($userData != null) {
+                return true;
+            }
+            return false;
         } else {
-            $array = array('user' => "none", 'pass' => "none", 'auth' => 0);
-            return $array;
+            return false;
         }
     }
 
@@ -61,7 +62,9 @@ class Crud extends Db_config
                 if (password_verify($Login_data->pass, $rows[0]['pass'])) {
                     $_SESSION['user'] = $Login_data->email;
                     $_SESSION['pass'] = $Login_data->pass;
-                    return true;
+                    $token = join(';',array($Login_data->email,$Login_data->pass));
+                    $token = base64_encode($token);
+                    return $token;
                 } else {
                     return 'badpass';
                 }

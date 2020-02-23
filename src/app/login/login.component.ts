@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
           this.Login_form.reset();
         } else {
           this.router.navigate(['']);
+          console.log(res);
           this.login.getLogged(true);
           window.alert("Pomyślnie zalogowano");
         }

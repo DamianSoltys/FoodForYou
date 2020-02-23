@@ -33,7 +33,7 @@ export class AuthenticationGuardGuard implements CanActivate, CanActivateChild {
 
   checkauth() {
     this.login.checkAuth().subscribe(res => {
-      if (res['auth'] === 1) {
+      if (res) {
         this.response = true;
       } else {
         this.response = false;
