@@ -1,48 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../services/login.service';
-import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
-import { saveToken } from '../services/helperFunctions';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { LoginService } from "../services/login.service";
+import { Router } from "@angular/router";
+import { DataService } from "../services/data.service";
+import { saveToken } from "../services/helperFunctions";
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  public error: String = '';
+  public error: String = "";
   public Login_form = new FormGroup({
-    email: new FormControl('', Validators.email),
-    pass: new FormControl('', Validators.minLength(4))
+    email: new FormControl("", Validators.email),
+    pass: new FormControl("", Validators.minLength(4))
   });
   public email: String;
   public pass: String;
 
-  constructor(private login: LoginService, private router: Router, private dataService:DataService) { }
+  constructor(
+    private login: LoginService,
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   public onSubmit() {
-    this.email = this.Login_form.get('email').value;
-    this.pass = this.Login_form.get('pass').value;
+    this.email = this.Login_form.get("email").value;
+    this.pass = this.Login_form.get("pass").value;
     this.login.loginUser(this.email, this.pass).subscribe(
       res => {
-        if (res === '0user') {
-          this.error = 'Danego użytkownika nie ma w bazie danych!';
+        if (res === "0user") {
+          this.error = "Danego użytkownika nie ma w bazie danych!";
           this.Login_form.reset();
-        } else if (res === 'badpass') {
-          this.error = 'Złe hasło!';
+        } else if (res === "badpass") {
+          this.error = "Złe hasło!";
           this.Login_form.reset();
         } else {
-          this.router.navigate(['']);
+          this.router.navigate([""]);
           this.login.getLogged(true);
           saveToken(<string>res);
           window.alert("Pomyślnie zalogowano");
         }
-      }, error => {
-        this.error = 'Błąd połączenia!';
+      },
+      error => {
+        this.error = "Błąd połączenia!";
         console.log(error);
         this.Login_form.reset();
-      });
+      }
+    );
   }
 }

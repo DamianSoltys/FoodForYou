@@ -1,42 +1,41 @@
-
 <div class="container-fluid">
-<div class="row nav_bar">
-  <div class="col-lg-6 col-12 logos">
+  <div class="row nav_bar">
+    <div class="col-lg-6 col-12 logos">
       <a [routerLink]="['index']"><img src="./assets/images/logo.png" alt="food_logo" class="logo"></a>
       <span class="title">FoodForYou</span>
-  </div>
-  <div class="col-lg-6 col-12">
-    <ul class="navigation" *ngIf="!logged">
-      <li class="nav_item">
-        <a [routerLink]="['signup']" class="link_nav ">Zarejestruj się</a>
-      </li>
-      <li class="nav_item">
-        <a [routerLink]="['login']" class="link_nav">Logowanie</a>
-      </li>
-      <li class="nav_item">
-        <a [routerLink]="['contact']" class="link_nav">Kontakt</a>
-      </li>
-    </ul>
-    <ul class="navigation" *ngIf="logged">
-      <li class="nav_item">
-        <a [routerLink]="['user/plan']" class="link_nav">Plany</a>
-      </li>
-      <li class="nav_item">
-        <a [routerLink]="['user/change_info']" class="link_nav">Dane</a>
-      </li>
-      <li class="nav_item">
-        <span (click)="logout();" class="span_logout">Wyloguj</span>
-      </li>
-      <li class="nav_item">
-        <a [routerLink]="['contact']" class="link_nav">Kontakt</a>
-      </li>
-    </ul>
-  </div>
-  
+    </div>
+    <div class="col-lg-6 col-12">
+      <ul class="navigation" *ngIf="!logged">
+        <li class="nav_item" [routerLink]="['signup']">
+          <a class="link_nav ">Zarejestruj się</a>
+        </li>
+        <li class="nav_item" [routerLink]="['login']">
+          <a class="link_nav">Logowanie</a>
+        </li>
+        <li class="nav_item" [routerLink]="['contact']">
+          <a class="link_nav">Kontakt</a>
+        </li>
+      </ul>
+      <ul class="navigation" *ngIf="logged">
+        <li class="nav_item" [routerLink]="['user/plan']">
+          <a class="link_nav">Plany</a>
+        </li>
+        <li class="nav_item" [routerLink]="['user/change_info']">
+          <a class="link_nav">Dane</a>
+        </li>
+        <li class="nav_item" [routerLink]="['contact']">
+          <a class="link_nav">Kontakt</a>
+        </li>
+        <li class="nav_item">
+          <span (click)="logout();" class="span_logout">Wyloguj</span>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </div>
-<div class="container-fluid" >
-  <router-outlet ></router-outlet>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
 </div>
 <div class="container-fluid footer" id="footer">
   Made by <strong>Damian Sołtysiuk</strong>
