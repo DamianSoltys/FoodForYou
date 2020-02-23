@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { User } from './User';
 import { LoginService } from '../services/login.service';
 import { Plan } from './Plan';
-import { forEach } from '@angular/router/src/utils/collection';
 import { PlanService } from '../services/plan.service';
 
 

@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateCh
 import { Observable, of } from 'rxjs';
 import { LoginService } from './services/login.service';
 import { DataService } from './services/data.service';
+import { getToken } from './services/helperFunctions';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class AuthenticationGuardGuard implements CanActivate, CanActivateChild {
   }
 
   public checkauth() {
-    let token = this.dataService.getToken();
+    let token = getToken();
     if(!token) {
       return false;
     }

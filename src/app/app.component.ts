@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login.service';
 import { Router, Route } from '@angular/router';
 import { DataService } from './services/data.service';
+import { getToken } from './services/helperFunctions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.state = 'none';
     this.login.currentlogged.subscribe(logged => this.logged = logged);
-    this.login.checkAuth(this.dataService.getToken()).subscribe(res => {
+    this.login.checkAuth(getToken()).subscribe(res => {
       if (res) {
         this.logged = true;
       } else {
