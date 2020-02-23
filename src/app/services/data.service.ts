@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { switchMap } from 'rxjs/operators';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private loginService:LoginService) { }
 
     public storageAvailable() {
         var test = 'test';
@@ -19,16 +21,18 @@ export class DataService {
     }
 
     public changeData(username, surname, pass, sex, email) {
-        let token;
-        
-        if(this.storageAvailable()) {
-            token = localStorage.getItem('token');
-        }
-        return this.http.post('http://localhost/assets/Update', { 'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email, 'token':token});
+        return this.loginService.checkAuth(this.getToken()).pipe(
+            switchMap((value)=>this.http.post('http://localhost/assets/Update', { 'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email, 'token':this.getToken()}))
+        );
       }
     
     public getData() {
-        return this.http.get('http://localhost/assets/Update');
+        return this.loginService.checkAuth(this.getToken()).pipe(
+            switchMap(()=>{
+                let param = new HttpParams().set('token',this.getToken())
+                return this.http.get('http://localhost/assets/Update', {params:param})
+            })
+        );
     }
 
     public saveToken(token:string) {
@@ -42,10 +46,10 @@ export class DataService {
     public getToken() {
         if(this.storageAvailable()) {
             let token = localStorage.getItem('token');
-            return token?token:false;
+            return token?token:null;
         } else {
             console.log("Storage is not available!");
-            return false;
+            return null;
         }
     }
 

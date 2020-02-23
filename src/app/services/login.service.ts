@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { DataService } from './data.service';
 
@@ -18,7 +18,8 @@ export class LoginService {
   }
 
   public checkAuth(token:string | boolean) {
-    return this.http.post('http://localhost/assets/CheckAuth', { 'token' : token });
+    let param = new HttpParams().set('token',this.dataService.getToken())
+    return this.http.get('http://localhost/assets/CheckAuth', { params:param });
   }
 
   public logoutUser() {
