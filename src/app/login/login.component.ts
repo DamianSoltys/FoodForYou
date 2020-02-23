@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { saveToken } from '../services/helperFunctions';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
   public email: String;
   public pass: String;
 
-  constructor(private login: LoginService, private router: Router) { }
+  constructor(private login: LoginService, private router: Router, private dataService:DataService) { }
 
   ngOnInit() { }
 
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['']);
           this.login.getLogged(true);
+          saveToken(<string>res);
           window.alert("Pomyślnie zalogowano");
         }
       }, error => {

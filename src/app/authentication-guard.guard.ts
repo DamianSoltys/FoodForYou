@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { LoginService } from './services/login.service';
+import { DataService } from './services/data.service';
+import { getToken } from './services/helperFunctions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationGuardGuard implements CanActivate, CanActivateChild {
   response;
-  constructor(private login: LoginService, private router: Router) { }
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  constructor(private login: LoginService, private router: Router, private dataService:DataService) { }
+  public canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.checkauth()) {
       return true;
     } else {
@@ -19,9 +19,8 @@ export class AuthenticationGuardGuard implements CanActivate, CanActivateChild {
       return false;
     }
   }
-  canActivateChild(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+
+  public canActivateChild(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.checkauth()) {
       return true;
     } else {
@@ -31,17 +30,11 @@ export class AuthenticationGuardGuard implements CanActivate, CanActivateChild {
 
   }
 
-  checkauth() {
-    this.login.checkAuth().subscribe(res => {
-      if (res['auth'] === 1) {
-        this.response = true;
-      } else {
-        this.response = false;
-        window.alert('Proszę się zalogować');
-      }
-    }, error => {
-      return this.response = false;
-    });
-    return of(this.response);
+  public checkauth() {
+    let token = getToken();
+    if(!token) {
+      return false;
+    }
+    return true;
   }
 }

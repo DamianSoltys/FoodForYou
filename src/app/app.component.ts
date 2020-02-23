@@ -1,7 +1,8 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, AfterContentChecked, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login.service';
 import { Router, Route } from '@angular/router';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { DataService } from './services/data.service';
+import { getToken } from './services/helperFunctions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,14 +10,15 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 
 })
 export class AppComponent implements OnInit {
-  constructor(private login: LoginService, private router: Router) { }
+  constructor(private login: LoginService, private router: Router, private dataService:DataService) { }
   public logged;
   public state: String = 'none';
   ngOnInit(): void {
     this.state = 'none';
     this.login.currentlogged.subscribe(logged => this.logged = logged);
-    this.login.checkAuth().subscribe(res => {
-      if (res['auth'] === 1) {
+    this.login.checkAuth(getToken()).subscribe(res => {
+      console.log(res);
+      if (res) {
         this.logged = true;
       } else {
         this.logged = false;
@@ -27,12 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   public logout() {
+    this.login.logoutUser();
     this.router.navigate(['']);
-    this.login.logoutUser().subscribe(res => {
-      this.logged = !res;
-      window.alert('Pomyślnie wylogowano');
-    }, error => {
-      console.log(error);
-    });
   }
 }
