@@ -19,7 +19,12 @@ export class DataService {
     }
 
     public changeData(username, surname, pass, sex, email) {
-        return this.http.post('http://localhost/assets/Update', { 'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email });
+        let token;
+        
+        if(this.storageAvailable()) {
+            token = localStorage.getItem('token');
+        }
+        return this.http.post('http://localhost/assets/Update', { 'pass': pass, 'username': username, 'surname': surname, 'sex': sex, 'email': email, 'token':token});
       }
     
     public getData() {
@@ -31,6 +36,26 @@ export class DataService {
             localStorage.setItem('token',token);
         }else {
             console.log("Storage is not available!")
+        }
+    }
+
+    public getToken() {
+        if(this.storageAvailable()) {
+            let token = localStorage.getItem('token');
+            return token?token:false;
+        } else {
+            console.log("Storage is not available!");
+            return false;
+        }
+    }
+
+    public deleteToken() {
+        if(this.storageAvailable() && localStorage.getItem('token')) {
+            localStorage.removeItem('token');
+            return true;
+        } else {
+            console.log("Storage is not available!");
+            return false;
         }
     }
 }

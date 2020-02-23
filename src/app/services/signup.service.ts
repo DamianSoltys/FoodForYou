@@ -8,7 +8,7 @@ export class SignupService {
 
   constructor(private http: HttpClient) {}
 
-  Signup_func(username, surname, email, pass, sex) {
+  signUser(username, surname, email, pass, sex) {
     return this.http.post("http://localhost/assets/Signup", { "username": username, "surname": surname, "email": email, "pass": pass, "sex": sex });
   }
 }

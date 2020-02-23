@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
       this.email_ = this.Signup_form.get('email').value;
       this.pass_ = this.Signup_form.get('pass').value;
       this.sex_ = this.Signup_form.get('sex').value;
-      this.signup.Signup_func(this.username_, this.surname_, this.email_, this.pass_, this.sex_).subscribe(
+      this.signup.signUser(this.username_, this.surname_, this.email_, this.pass_, this.sex_).subscribe(
         res => {
           switch (res) {
             case 'usernameerr': {

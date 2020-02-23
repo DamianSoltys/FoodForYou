@@ -7,9 +7,9 @@
     $Plan_data=json_decode(file_get_contents("php://input"));
     
     if(isset($Plan_data)) {
-        $data=$crud->Post_Plan($Plan_data,$crud);
+        $data=$crud->Post_Plan($Plan_data, $crud, $Plan_data->token);
     }else {
-        $data=$crud->get_Plan($Plan_data,$crud);
+        $data=$crud->get_Plan($Plan_data, $crud, $Plan_data->token);
     }
     echo json_encode($data);
 ?>

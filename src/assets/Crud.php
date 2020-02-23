@@ -37,9 +37,10 @@ class Crud extends Db_config
         return $this->connection->real_escape_string($value);
     }
 
-    public function check($idUser = null, $token = null) {
-        if ($id_user && $token) {
-            $query = "SELECT * FROM users WHERE Id_user='$id_user'";
+    public function check($token = null) {
+        if ($token) {
+            $tokenArray = $this->decryptToken($token);
+            $query = "SELECT * FROM users WHERE email='$tokenArray[0]'";
             $userData = $this->Get_data($query);
             if ($userData != null) {
                 return true;
@@ -48,6 +49,12 @@ class Crud extends Db_config
         } else {
             return false;
         }
+    }
+
+    private function decryptToken($token) {
+        $decryptedToken = base64_decode($token);
+        $decryptedToken = explode(';',$token);
+        return $decryptedToken;
     }
 
     public function Login($Login_data, $crud) {
@@ -60,8 +67,6 @@ class Crud extends Db_config
         if ($rows != null) {
             if ($rows[0]['email'] == $Login_data->email) {
                 if (password_verify($Login_data->pass, $rows[0]['pass'])) {
-                    $_SESSION['user'] = $Login_data->email;
-                    $_SESSION['pass'] = $Login_data->pass;
                     $token = join(';',array($Login_data->email,$Login_data->pass));
                     $token = base64_encode($token);
                     return $token;
@@ -72,15 +77,6 @@ class Crud extends Db_config
         } else {
             return '0user';
         }
-    }
-
-    public function Logout() {
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-            session_destroy();
-            session_abort();
-        }
-        return true;
     }
 
     public function Signup($Signup_data, $crud) {
@@ -127,8 +123,8 @@ class Crud extends Db_config
         }
     }
 
-    public function Update($Change_data, $crud) {
-        if (isset($Change_data)) {
+    public function Update($Change_data, $crud, $token = null) {
+        if (isset($Change_data) && $token) {
             $Change_data->username = $crud->escape_string($Change_data->username);
             $Change_data->surname = $crud->escape_string($Change_data->surname);
             $Change_data->pass = $crud->escape_string($Change_data->pass);
@@ -150,28 +146,28 @@ class Crud extends Db_config
                 exit();
             }
 
-            $user = $_SESSION['user'];
+            $tokenArray = $this->decryptToken($token);
             $Change_data->pass = password_hash($Change_data->pass, PASSWORD_DEFAULT);
             $query = "UPDATE users SET username='$Change_data->username',surname='$Change_data->surname',pass='$Change_data->pass',sex='$Change_data->sex' WHERE email='$user'";
             $data = $crud->execute($query);
 
             if ($data) {
-                $query = "SELECT * FROM users WHERE email='$user'";
+                $query = "SELECT * FROM users WHERE email='$tokenArray[0]'";
                 $data = $crud->Get_data($query);
             }
             return $data;
         } else {
-            $user = $_SESSION['user'];
-            $query = "SELECT * FROM users WHERE email='$user'";
+            $tokenArray = $this->decryptToken($token);
+            $query = "SELECT * FROM users WHERE email='$tokenArray[0]'";
             $data = $crud->Get_data($query);
             return $data;
         }
     }
 
-    public function Post_Plan($Plan_data, $crud) {
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            $query = "SELECT Id_user FROM users WHERE email='$user'";
+    public function Post_Plan($Plan_data, $crud, $token = null) {
+        if ($token) {
+            $tokenArray = $this->decryptToken($token);
+            $query = "SELECT Id_user FROM users WHERE email='$tokenArray[0]'";
             $rows = $crud->Get_data($query);
 
             if ($rows != null) {
@@ -187,10 +183,10 @@ class Crud extends Db_config
         }
     }
 
-    public function get_Plan($Plan_data, $crud) {
-        if (isset($_SESSION['user'])) {
-            $user = $_SESSION['user'];
-            $query = "SELECT Id_user FROM users WHERE email='$user'";
+    public function get_Plan($Plan_data, $crud, $token = null) {
+        if ($token) {
+            $tokenArray = $this->decryptToken($token);
+            $query = "SELECT Id_user FROM users WHERE email='$tokenArray[0]'";
             $rows = $crud->Get_data($query);
             $id_user = $rows[0]['Id_user'];
             $query = "SELECT * FROM plans WHERE id_user='$id_user'";
@@ -205,8 +201,9 @@ class Crud extends Db_config
         }
     }
     
-    public function delete_plan($Plan_data, $crud) {
-        if (isset($_SESSION['user'])) {
+    public function delete_plan($Plan_data, $crud, $token = null) {
+        if ($token) {
+            $tokenArray = $this->decryptToken($token);
             $query = "DELETE FROM plans WHERE '$Plan_data->id_plan'=id_plan";
             $data = $crud->execute($query);
             return $data;
