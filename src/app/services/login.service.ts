@@ -24,6 +24,7 @@ export class LoginService {
 
   public logoutUser() {
     deleteToken();
+    this.logged.next(false);
   }
 
   public getLogged(logged) {

@@ -29,7 +29,7 @@ export class PlanService {
     public deletePlan(id_plan) {
       return this.loginService.checkAuth(getToken()).pipe(
         switchMap(()=>{
-          let param = new HttpParams().set('token',getToken())
+          let param = new HttpParams().set('token',getToken()).set('id_plan',id_plan);
           return this.http.delete('http://localhost/assets/Delete_plan', { params:param });
         })
       );

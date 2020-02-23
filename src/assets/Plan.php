@@ -1,15 +1,13 @@
 <?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
     include 'Crud.php';
+
     $crud=new Crud();
     $Plan_data=json_decode(file_get_contents("php://input"));
     
-    if(isset($Plan_data)) {
-        $data=$crud->Post_Plan($Plan_data, $crud, $Plan_data->token);
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $data=$crud->post_Plan($Plan_data, $crud, $Plan_data->token);
     }else {
-        $data=$crud->get_Plan($Plan_data, $crud, $Plan_data->token);
+        $data=$crud->get_Plan($Plan_data, $crud, $_GET['token']);
     }
     echo json_encode($data);
 ?>

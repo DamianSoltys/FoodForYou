@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     this.state = 'none';
     this.login.currentlogged.subscribe(logged => this.logged = logged);
     this.login.checkAuth(getToken()).subscribe(res => {
+      console.log(res);
       if (res) {
         this.logged = true;
       } else {

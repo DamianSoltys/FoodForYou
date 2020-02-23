@@ -18,12 +18,10 @@ export function saveToken(token:string) {
 }
 
 export function getToken() {
-    if(storageAvailable()) {
-        let token = localStorage.getItem('token');
-        return token?token:null;
+    if(storageAvailable() && localStorage.getItem('token')) {
+        return localStorage.getItem('token');
     } else {
-        console.log("Storage is not available!");
-        return null;
+        return '';
     }
 }
 
@@ -32,7 +30,6 @@ export function deleteToken() {
         localStorage.removeItem('token');
         return true;
     } else {
-        console.log("Storage is not available!");
         return false;
     }
 }
