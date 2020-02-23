@@ -1,76 +1,75 @@
 <div class="row">
-  <div class="col-6">
-   <ul class="navigation">
-   <li class="nav_item">Imie: {{user.username}}</li>
-   <li class="nav_item">Nazwisko: {{user.surname}}</li>
-   <li class="nav_item">Email: {{user.email}}</li>
-   <li class="nav_item">Plec: {{user.sex}}</li>
-   </ul>
+  <div class="col-12">
+    <ul class="navigation">
+      <li class="nav_item">Imie: {{user.username}}</li>
+      <li class="nav_item">Nazwisko: {{user.surname}}</li>
+      <li class="nav_item">Email: {{user.email}}</li>
+      <li class="nav_item">Plec: {{user.sex}}</li>
+    </ul>
+  </div>
 </div>
-</div>
-<div class="row">
-    <form class="forms col-6" [formGroup]="Change_form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="name">Imię</label>
-        <input type="text" class="form-control" formControlName="username" required
+<div class="row form-container">
+  <form class="forms col-12" [formGroup]="Change_form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Imię</label>
+      <input type="text" class="form-control" formControlName="username" required
         [class.is-invalid]="Change_form.get('username').invalid && Change_form.get('username').touched">
-        <div *ngIf="Change_form.get('username').invalid && Change_form.get('username').touched">
-          <small *ngIf="Change_form.get('username').errors?.required" class="text-danger">Imie jest wymagane</small>
-          <small *ngIf="Change_form.get('username').errors?.minlength" class="text-danger">Imie musi mieć więcej niż 3 znaki</small>
-      
-        </div>
-        </div>
-        <div class="form-group">
-            <label for="surname">Nazwisko</label>
-          <input type="text" class="form-control" formControlName="surname" required
-          [class.is-invalid]="Change_form.get('surname').invalid && Change_form.get('surname').touched">
-          <div *ngIf="Change_form.get('surname').invalid && Change_form.get('surname').touched">
-          <small *ngIf="Change_form.get('surname').errors?.required" class="text-danger">Nazwisko jest wymagane</small>
-          <small *ngIf="Change_form.get('surname').errors?.minlength" class="text-danger">Nazwisko musi mieć więcej niż 3 znaki</small>
-          </div>
-        </div>
-        <div class="form-group">
-            <label for="name">Hasło</label>
-          <input type="password" class="form-control" formControlName="pass" required
-         [class.is-invalid]="Change_form.get('pass').invalid && Change_form.get('pass').touched">
-          <div *ngIf="Change_form.get('pass').invalid && Change_form.get('pass').touched">
-            <small *ngIf="Change_form.get('pass').errors?.required" class="text-danger">Hasło jest wymagane</small>
-            <small *ngIf="Change_form.get('pass').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3 znaki</small> 
-        
-          </div>
-          
-          </div>
-          <div class="form-group">
-              <label for="passcheck">Powtórz hasło</label>
-            <input type="password" class="form-control" formControlName="passcheck" required
-            [class.is-invalid]="Change_form.get('passcheck').invalid && Change_form.get('passcheck').touched">
-          <div *ngIf="Change_form.get('passcheck').invalid && Change_form.get('passcheck').touched">
-            <small *ngIf="Change_form.get('passcheck').errors?.required" class="text-danger">Hasło jest wymagane</small>
-            <small *ngIf="Change_form.get('passcheck').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3 znaki</small> 
-        
-          </div>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="sex" value="man" id="sex1" required>
-              <label class="form-check-label" for="sex1">Mężczyzna</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" formControlName="sex" value="woman" id="sex2" required>
-                <label class="form-check-label" for="sex2">Kobieta</label>
-                <div *ngIf="Change_form.get('sex').touched">
-                    <small *ngIf="Change_form.get('sex').errors?.required" class="text-danger">Hasło</small>
-                    </div>
-              </div>
-              <div class="form-group">
-                <button type="submit" [disabled]="!Change_form.valid">Zatwierdź</button>
-              </div>
-              <div *ngIf="error">
-                <small [class.text-danger]="!success" [class.text-success]="success">{{error}}</small>
-              </div>
+      <div *ngIf="Change_form.get('username').invalid && Change_form.get('username').touched">
+        <small *ngIf="Change_form.get('username').errors?.required" class="text-danger">Imię jest wymagane</small>
+        <small *ngIf="Change_form.get('username').errors?.minlength" class="text-danger">Imie musi mieć więcej niż 3
+          znaki</small>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="surname">Nazwisko</label>
+      <input type="text" class="form-control" formControlName="surname" required
+        [class.is-invalid]="Change_form.get('surname').invalid && Change_form.get('surname').touched">
+      <div *ngIf="Change_form.get('surname').invalid && Change_form.get('surname').touched">
+        <small *ngIf="Change_form.get('surname').errors?.required" class="text-danger">Nazwisko jest wymagane</small>
+        <small *ngIf="Change_form.get('surname').errors?.minlength" class="text-danger">Nazwisko musi mieć więcej niż 3
+          znaki</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="name">Hasło</label>
+      <input type="password" class="form-control" formControlName="pass" required
+        [class.is-invalid]="Change_form.get('pass').invalid && Change_form.get('pass').touched">
+      <div *ngIf="Change_form.get('pass').invalid && Change_form.get('pass').touched">
+        <small *ngIf="Change_form.get('pass').errors?.required" class="text-danger">Hasło jest wymagane</small>
+        <small *ngIf="Change_form.get('pass').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3
+          znaki</small>
+
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label for="passcheck">Powtórz hasło</label>
+      <input type="password" class="form-control" formControlName="passcheck" required
+        [class.is-invalid]="Change_form.get('passcheck').invalid && Change_form.get('passcheck').touched">
+      <div *ngIf="Change_form.get('passcheck').invalid && Change_form.get('passcheck').touched">
+        <small *ngIf="Change_form.get('passcheck').errors?.required" class="text-danger">Hasło jest wymagane</small>
+        <small *ngIf="Change_form.get('passcheck').errors?.minlength" class="text-danger">Hasło musi mieć więcej niż 3
+          znaki</small>
+
+      </div>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" formControlName="sex" value="man" id="sex1" required>
+      <label class="form-check-label" for="sex1">Mężczyzna</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" formControlName="sex" value="woman" id="sex2" required>
+      <label class="form-check-label" for="sex2">Kobieta</label>
+      <div *ngIf="Change_form.get('sex').touched">
+        <small *ngIf="Change_form.get('sex').errors?.required" class="text-danger">Hasło</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" [disabled]="!Change_form.valid">Zatwierdź</button>
+    </div>
+    <div *ngIf="error">
+      <small [class.text-danger]="!success" [class.text-success]="success">{{error}}</small>
+    </div>
   </form>
-
-
-
-
-
 </div>

@@ -1,7 +1,12 @@
-.form{
-    width:30%;
-    margin-left:35%;
-    margin-right:35%;
-    text-align: center;
-    margin-top:5%;
+.form {
+  width: 30%;
+  margin: auto;
+  text-align: center;
+  margin-top: 5%;
+}
+
+@media screen and (max-width: 992px) {
+  .form {
+    width: 80%;
+  }
 }
