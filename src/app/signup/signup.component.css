@@ -10,3 +10,17 @@
     width: 80%;
   }
 }
+
+.btn-light {
+  width:50%;
+  color:#fff;
+  background-color: rgba(114, 37, 73, 0.835);
+  border: 2px rgba(119, 7, 59, 0.835) solid;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.btn-light:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
